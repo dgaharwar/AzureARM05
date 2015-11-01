@@ -4,6 +4,7 @@
   "parameters": {
     "virtualNetworkName": {
       "type": "string",
+      "defaultValue": "andbron-austse-vnet01",
       "metadata": {
         "description": "This is the name of the Virtual Network"
       }
@@ -90,7 +91,7 @@
   "variables": {
     "availabilitySetName": "AvSet",
     "storageAccountType": "Standard_LRS",
-    "subnetName": "backendSubnet",
+    "subnetName": "ab-subnet-vm-tmp12",
     "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',parameters('virtualNetworkName'))]",
     "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables ('subnetName'))]",
     "numberOfInstances": 2,
@@ -120,7 +121,7 @@
       "properties": {
         "addressSpace": {
           "addressPrefixes": [
-            "10.0.0.0/16"
+            "10.1.0.0/16"
           ]
         },
         "subnets": [
