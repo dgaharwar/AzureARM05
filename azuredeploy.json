@@ -94,7 +94,7 @@
     "subnetName": "ab-subnet-vm-tmp12",
     "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',parameters('virtualNetworkName'))]",
     "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables ('subnetName'))]",
-    "numberOfInstances": 2,
+    "numberOfInstances": 1,
     "lbID": "[resourceId('Microsoft.Network/loadBalancers',parameters('loadBalancerName'))]"
   },
   "resources": [
