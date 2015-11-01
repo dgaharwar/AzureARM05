@@ -127,7 +127,7 @@
           {
             "name": "[variables('subnetName')]",
             "properties": {
-              "addressPrefix": "10.0.2.0/24"
+              "addressPrefix": "10.1.12.0/24"
             }
           }
         ]
@@ -180,7 +180,7 @@
               "subnet": {
                 "id": "[variables('subnetRef')]"
               },
-              "privateIPAddress": "10.0.2.6",
+              "privateIPAddress": "10.1.12.6",
               "privateIPAllocationMethod": "Static"
             },
             "name": "LoadBalancerFrontend"
