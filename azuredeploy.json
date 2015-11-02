@@ -2,13 +2,6 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "virtualNetworkName": {
-      "type": "string",
-      "defaultValue": "andbron-austse-vnet01",
-      "metadata": {
-        "description": "This is the name of the Virtual Network"
-      }
-    },
     "networkInterfaceName": {
       "type": "string",
       "metadata": {
@@ -89,10 +82,11 @@
     }
   },
   "variables": {
+    "virtualNetworkName": "andbron-austse-vnet01",
     "availabilitySetName": "AvSet",
     "storageAccountType": "Standard_LRS",
-    "subnetName": "ab-subnet-vm-tmp12",
-    "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',parameters('virtualNetworkName'))]",
+    "subnetName": "ab-subnet-vm-tmp01",
+    "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('virtualNetworkName'))]",
     "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables ('subnetName'))]",
     "numberOfInstances": 1,
     "lbID": "[resourceId('Microsoft.Network/loadBalancers',parameters('loadBalancerName'))]"
@@ -116,7 +110,7 @@
     {
       "apiVersion": "2015-05-01-preview",
       "type": "Microsoft.Network/virtualNetworks",
-      "name": "[parameters('virtualNetworkName')]",
+      "name": "[variables('virtualNetworkName')]",
       "location": "[resourceGroup().location]",
       "properties": {
         "addressSpace": {
@@ -128,7 +122,7 @@
           {
             "name": "[variables('subnetName')]",
             "properties": {
-              "addressPrefix": "10.1.12.0/24"
+              "addressPrefix": "10.1.10.0/24"
             }
           }
         ]
@@ -144,7 +138,7 @@
         "count": "[variables('numberOfInstances')]"
       },
       "dependsOn": [
-        "[concat('Microsoft.Network/virtualNetworks/', parameters('virtualNetworkName'))]",
+        "[concat('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]",
         "[concat('Microsoft.Network/loadBalancers/', parameters('loadBalancerName'))]"
       ],
       "properties": {
@@ -181,7 +175,7 @@
               "subnet": {
                 "id": "[variables('subnetRef')]"
               },
-              "privateIPAddress": "10.1.12.6",
+              "privateIPAddress": "10.1.10.10",
               "privateIPAllocationMethod": "Static"
             },
             "name": "LoadBalancerFrontend"
@@ -236,7 +230,7 @@
       "location": "[resourceGroup().location]",
       "dependsOn": [
         "[concat('Microsoft.Storage/storageAccounts/', parameters('storageAccountName'))]",
-        "[concat('Microsoft.Network/networkInterfaces/', parameters('networkInterfaceName'), copyindex())]",
+        "[concat('Microsoft.Network/networkInterfaces/', variables('networkInterfaceName'), copyindex())]",
         "[concat('Microsoft.Compute/availabilitySets/', variables('availabilitySetName'))]"
       ],
       "properties": {
@@ -270,7 +264,7 @@
         "networkProfile": {
           "networkInterfaces": [
             {
-              "id": "[resourceId('Microsoft.Network/networkInterfaces',concat(parameters('networkInterfaceName'),copyindex()))]"
+              "id": "[resourceId('Microsoft.Network/networkInterfaces',concat(variables('networkInterfaceName'),copyindex()))]"
             }
           ]
         },
