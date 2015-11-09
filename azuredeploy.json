@@ -4,7 +4,7 @@
   "parameters": {
     "virtualNetworkName": {
       "type": "string",
-      "defaultValue": "andbron-austse-vnet01",
+      "defaultValue": "arm05vnet",
       "metadata": {
         "description": "This is the name of the Virtual Network"
       }
@@ -42,7 +42,7 @@
     },
     "vmNamePrefix": {
       "type": "string",
-      "defaultValue": "BackendVM",
+      "defaultValue": "arm05vm",
       "metadata": {
         "description": "Prefix to use for VM names"
       }
@@ -91,7 +91,7 @@
   "variables": {
     "availabilitySetName": "AvSet",
     "storageAccountType": "Standard_LRS",
-    "subnetName": "ab-subnet-vm-tmp12",
+    "subnetName": "ab-subnet-arm05-tmp05",
     "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',parameters('virtualNetworkName'))]",
     "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables ('subnetName'))]",
     "numberOfInstances": 1,
@@ -121,14 +121,14 @@
       "properties": {
         "addressSpace": {
           "addressPrefixes": [
-            "10.1.0.0/16"
+            "10.5.0.0/16"
           ]
         },
         "subnets": [
           {
             "name": "[variables('subnetName')]",
             "properties": {
-              "addressPrefix": "10.1.12.0/24"
+              "addressPrefix": "10.5.1.0/24"
             }
           }
         ]
@@ -181,7 +181,7 @@
               "subnet": {
                 "id": "[variables('subnetRef')]"
               },
-              "privateIPAddress": "10.1.12.6",
+              "privateIPAddress": "10.5.1.60",
               "privateIPAllocationMethod": "Static"
             },
             "name": "LoadBalancerFrontend"
