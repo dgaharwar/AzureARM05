@@ -82,7 +82,7 @@
     },
     "vmSize": {
       "type": "string",
-      "defaultValue": "Standard_D1",
+      "defaultValue": "Standard_A0",
       "metadata": {
         "description": "This is the allowed list of VM sizes"
       }
