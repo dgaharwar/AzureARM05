@@ -91,7 +91,7 @@
   "variables": {
     "availabilitySetName": "AvSet",
     "storageAccountType": "Standard_LRS",
-    "subnetName": "ab-subnet-arm05-tmp05",
+    "subnetName": "andbron-austse-arm05subnet",
     "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',parameters('virtualNetworkName'))]",
     "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables ('subnetName'))]",
     "numberOfInstances": 1,
